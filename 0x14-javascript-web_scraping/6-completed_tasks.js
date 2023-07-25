@@ -6,13 +6,13 @@ const apiUrl = process.argv[2];
 request(apiUrl, (error, response, body) => {
   if (error) {
     console.error(error);
-    return;
+    process.exit(1);
   }
 
   const data = JSON.parse(body);
   const completedTasks = {};
 
-  data.forEach(task => {
+  data.forEach((task) => {
     if (task.completed) {
       const userId = task.userId;
       completedTasks[userId] = (completedTasks[userId] || 0) + 1;
